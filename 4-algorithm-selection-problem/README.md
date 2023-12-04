@@ -9,16 +9,18 @@ This problem often follows the problem of sorting list mainly because one of its
 ### Input
 
 Given:
-* a list of n integers: `L = [a1, ..., an]`
-* i and integer of [1, n] 
 
-### Goal 
+* a list of n integers: `L = [a1, ..., an]`
+* i and integer of [1, n]
+
+### Goal
 
 We want to return the value of the ith order statistic (i.e. ith smallest element of L)
 
 ***Example***: One specific case of this problem is finding the **median**:
-- the (n+1)/2th element in n i odd
-- the n/2th element if n is even
+
+    - the (n+1)/2th element in n i odd
+    - the n/2th element if n is even
 
 ## Solutions
 
@@ -36,9 +38,10 @@ This method is based on the same principal as the **quick sort** algorithm for l
 
 ### DIVIDE
 
-We call randomized_selection(L, i). <br>
+We call randomized_selection(L, i).
 We choose a **random** element of the list.
 We partition the other element of the list around this pivot, i.e., by scanning through the other elements of the list:
+
 * if L[i] <= pivot it goes on the left: **L_left**
 * if L[i] > pivot it goes on the right: **L_right**
 
@@ -51,9 +54,9 @@ We partition the other element of the list around this pivot, i.e., by scanning 
 
 ### 3. Deterministic selection
 
-This method is also based  ob the same principal as the **quick sort** algorithm for lists, with the **divide to conquer paradigm**. The difference is the strategy we have to choose the pivot at each iteration. We use for that the method of **median of medians**.
+    This method is also based  ob the same principal as the **quick sort** algorithm for lists, with the **divide to conquer paradigm**. The difference is the strategy we have to choose the pivot at each iteration. We use for that the method of **median of medians**.
 
-### DIVIDE
+    **DIVIDE**
 
 * **Choice of the pivot**
 
@@ -68,17 +71,9 @@ As soon as we get the pivot,  we use the same strategy as for the **randomized s
 
 * **Partition L around pivot**
 
-    - if L[i] <= pivot it goes on the left: **L_left**
-    - if L[i] > pivot it goes on the right: **L_right**
+  * if L[i] <= pivot it goes on the left: **L_left**
+  * if L[i] > pivot it goes on the right: **L_right**
 
-### CONQUER
-
+        **CONQUER**
 * If i (the order statistics that we look for) <= i_pivot: we call recursively `randomized_selection(L_left, i)`
 * If i > i_pivot: we call recursively `randomized_selection(L_right, i_pivot-i)`
-
-
-
-
-
-
-

@@ -49,10 +49,12 @@ def built_in_sort_reduction(L_input: list, i: int) -> int:
     return sorted(L)[i]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     test_list = InputList(l_length=10)
     print(test_list)
     for i in range(len(test_list)):
-        print(f'The {i}-th order statistics is {built_in_sort_reduction(L=test_list, i=i)}')
+        print(
+            f"The {i}-th order statistics is {built_in_sort_reduction(L=test_list, i=i)}"
+        )
     # Test of raise
     # print(f'The {10}-th order statistics is {quick_sort_reduction(L=test_list, i=10)}')

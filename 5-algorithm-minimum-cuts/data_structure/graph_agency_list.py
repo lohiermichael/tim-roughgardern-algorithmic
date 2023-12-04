@@ -8,7 +8,7 @@ class Vertex:
         print(self.__repr__())
 
     def __repr__(self):
-        return f'Vertex({self.name})'
+        return f"Vertex({self.name})"
 
 
 class Edge:
@@ -18,7 +18,7 @@ class Edge:
         print(self.__repr__())
 
     def __repr__(self):
-        return f'{self.vertex_1.__repr__()} <---> {self.vertex_2.__repr__()}'
+        return f"{self.vertex_1.__repr__()} <---> {self.vertex_2.__repr__()}"
 
 
 class Graph:
@@ -35,16 +35,18 @@ class Graph:
 
     def add_edge(self, e: Edge):
         if e.vertex_1 not in self.vertices or e.vertex_2 not in self.vertices:
-            raise ReferenceError("The vertices of the edge that you try to add the graph don't belong to it")
+            raise ReferenceError(
+                "The vertices of the edge that you try to add the graph don't belong to it"
+            )
         self.edges.append(e)
 
     def __repr__(self):
         repr_vertices = self.vertices.__repr__()
         repr_edges = self.edges.__repr__()
-        return f'Vertices: {repr_vertices}\n Edges: {repr_edges}'
+        return f"Vertices: {repr_vertices}\n Edges: {repr_edges}"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     v1 = Vertex(1)
     v2 = Vertex(2)
     v3 = Vertex(3)

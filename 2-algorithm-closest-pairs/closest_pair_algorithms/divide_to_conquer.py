@@ -45,7 +45,7 @@ def closest_split_pair(Px, Py, pair_dist):
     Sy = [x for x in Py if xm - delta <= x[0] <= xm + delta]
     best = delta
     for i, point1 in enumerate(Sy):
-        for point2 in Sy[i + 1: i + 8]:
+        for point2 in Sy[i + 1 : i + 8]:
             current_dist = d(point1, point2)
             if current_dist < best:
                 best_pair = point1, point2

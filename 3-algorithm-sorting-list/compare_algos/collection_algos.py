@@ -21,7 +21,7 @@ class CollectionAlgos(List[AlgoAnalysis]):
         self._construct()
 
     def __str__(self):
-        return 'CollectionAlgos(' + ', '.join(self.list_algorithms_name) + ')'
+        return "CollectionAlgos(" + ", ".join(self.list_algorithms_name) + ")"
 
     def _construct(self):
         """
@@ -67,18 +67,26 @@ class CollectionAlgos(List[AlgoAnalysis]):
         random_list = InputList(**kwargs)
 
         # First assert that they all have the same results, if not who cares how fast they are
-        assert self.have_same_output(random_list), "The time evaluation is not significant as the outputs of" \
-                                                   "the algorithms differ"
+        assert self.have_same_output(random_list), (
+            "The time evaluation is not significant as the outputs of"
+            "the algorithms differ"
+        )
 
-        return {algo_analysis.algo_name: algo_analysis.calculate_time_single_list(input_l=random_list)
-                for algo_analysis in self}
+        return {
+            algo_analysis.algo_name: algo_analysis.calculate_time_single_list(
+                input_l=random_list
+            )
+            for algo_analysis in self
+        }
 
-    def calculate_time_multiple_lists(self,
-                                      range_length: int,
-                                      harmonization: bool = True,
-                                      f_harmonization=10,
-                                      worst_case: bool = False,
-                                      **kwargs):
+    def calculate_time_multiple_lists(
+        self,
+        range_length: int,
+        harmonization: bool = True,
+        f_harmonization=10,
+        worst_case: bool = False,
+        **kwargs
+    ):
         """
         Generate random input lists of variate length within the range size
         and perform the time computation for the different algorithms
@@ -100,18 +108,24 @@ class CollectionAlgos(List[AlgoAnalysis]):
         # as future column of the dataFrame
         # The values of the dataFrame are the times of computation
 
-        dict_of_series = {algo_name: algo.calculate_time_multiple_lists(range_length=range_length,
-                                                                        harmonization=harmonization,
-                                                                        f_harmonization=f_harmonization,
-                                                                        worst_case=worst_case,
-                                                                        **kwargs).iloc[:, -1]
-                          for algo, algo_name in zip(self, self.list_algorithms_name)}
+        dict_of_series = {
+            algo_name: algo.calculate_time_multiple_lists(
+                range_length=range_length,
+                harmonization=harmonization,
+                f_harmonization=f_harmonization,
+                worst_case=worst_case,
+                **kwargs
+            ).iloc[:, -1]
+            for algo, algo_name in zip(self, self.list_algorithms_name)
+        }
         return pd.DataFrame.from_dict(data=dict_of_series)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     compare_algo = CollectionAlgos(sorted, merge_sort)
     test_list = InputList()
-    df = compare_algo.calculate_time_multiple_lists(range_length=1000, harmonization=False)
+    df = compare_algo.calculate_time_multiple_lists(
+        range_length=1000, harmonization=False
+    )
     df.plot()
     plt.show()

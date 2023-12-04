@@ -29,7 +29,11 @@ def quick_sort_michael_first_element(L: List) -> List:
             else:
                 L_right.append(x)
 
-        return quick_sort_michael_first_element(L_left) + [pivot] + quick_sort_michael_first_element(L_right)
+        return (
+            quick_sort_michael_first_element(L_left)
+            + [pivot]
+            + quick_sort_michael_first_element(L_right)
+        )
 
 
 def quick_sort_michael(input_list: List, randomized: bool = True) -> List:
@@ -63,9 +67,11 @@ def quick_sort_michael(input_list: List, randomized: bool = True) -> List:
                 else:
                     L_right.append(x)
 
-            return quick_sort_michael(L_left, randomized=randomized) \
-                   + [pivot] \
-                   + quick_sort_michael(L_right, randomized=randomized)
+            return (
+                quick_sort_michael(L_left, randomized=randomized)
+                + [pivot]
+                + quick_sort_michael(L_right, randomized=randomized)
+            )
     else:
         return quick_sort_michael_first_element(L)
 
@@ -170,6 +176,7 @@ def quick_sort_inplace(L: List, randomized: bool = True) -> List:
     if not randomized:
         return quick_sort_inplace_first_element(L)
     else:
+
         def sub_function_random(L: List, left: int, right: int):
             if left < right:
                 i_pivot = partition_random(L, left=left, right=right)
@@ -180,9 +187,8 @@ def quick_sort_inplace(L: List, randomized: bool = True) -> List:
         return L
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     test_sorting_algo(number_tests=1000, algo_name=quick_sort_michael)
     test_sorting_algo(number_tests=1000, algo_name=quick_sort_michael_first_element)
     test_sorting_algo(number_tests=1000, algo_name=quick_sort_inplace_first_element)
     test_sorting_algo(number_tests=1000, algo_name=quick_sort_inplace)
-

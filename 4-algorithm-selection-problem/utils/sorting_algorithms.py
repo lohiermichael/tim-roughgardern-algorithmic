@@ -72,9 +72,11 @@ def quick_sort(L: List) -> list:
     else:
         pivot = random.choice(L)
         L.remove(pivot)
-        return quick_sort([x for x in L if x <= pivot]) \
-               + [pivot] \
-               + quick_sort([x for x in L if x > pivot])
+        return (
+            quick_sort([x for x in L if x <= pivot])
+            + [pivot]
+            + quick_sort([x for x in L if x > pivot])
+        )
 
 
 if __name__ == "__main__":

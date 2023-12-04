@@ -33,11 +33,13 @@ class Graph:
         return pd.DataFrame(data=self.edges, index=self.vertices, columns=self.vertices)
 
     def to_networkx(self) -> nx.Graph:
-        G = nx.from_numpy_matrix(self.df.values, parallel_edges=True,
-                                 create_using=nx.MultiDiGraph())
-        label_mapping = {node_index: node_name
-                         for node_index, node_name
-                         in enumerate(self.df.columns)}
+        G = nx.from_numpy_matrix(
+            self.df.values, parallel_edges=True, create_using=nx.MultiDiGraph()
+        )
+        label_mapping = {
+            node_index: node_name
+            for node_index, node_name in enumerate(self.df.columns)
+        }
         G = nx.relabel_nodes(G, label_mapping)
         return G
 
@@ -53,11 +55,11 @@ class Graph:
 
 if __name__ == "__main__":
     g = Graph()
-    g.add_vertex('a')
-    g.add_vertex('b')
-    g.add_vertex('c')
-    g.add_edge('a', 12)
-    g.add_edge('a', 'c')
+    g.add_vertex("a")
+    g.add_vertex("b")
+    g.add_vertex("c")
+    g.add_edge("a", 12)
+    g.add_edge("a", "c")
     G = g.nx
     print(nx.spring_layout(G))
     g.draw()

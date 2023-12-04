@@ -23,17 +23,17 @@ def test_add_edges(G):
 
 
 def print_number_nodes_edges(G, local_variables):
-    print(f'{name_str(G, local_variables)} has {G.number_of_nodes()} nodes')
-    print(f'{name_str(G, local_variables)} has {G.number_of_edges()} edges')
+    print(f"{name_str(G, local_variables)} has {G.number_of_nodes()} nodes")
+    print(f"{name_str(G, local_variables)} has {G.number_of_edges()} edges")
 
 
 def print_nodes_edges(G, local_variables):
-    print(f'{name_str(G, local_variables)} nodes: {G.nodes()}')
-    print(f'{name_str(G, local_variables)} edges: {G.edges()}')
+    print(f"{name_str(G, local_variables)} nodes: {G.nodes()}")
+    print(f"{name_str(G, local_variables)} edges: {G.edges()}")
 
 
 def test_remove_edge(G):
-    print('Remove edge between 1 and 3')
+    print("Remove edge between 1 and 3")
     G.remove_edge(1, 3)
 
 
@@ -44,7 +44,7 @@ if __name__ == "__main__":
     test_add_edges(G_test)
     print_number_nodes_edges(G_test, locals())
     print_nodes_edges(G_test, locals())
-    print(f'Number of edges to 1: {G_test.degree[1]}')
+    print(f"Number of edges to 1: {G_test.degree[1]}")
     test_remove_edge(G_test)
     print_nodes_edges(G_test, locals())
     # Remove all nodes and edges
@@ -52,5 +52,5 @@ if __name__ == "__main__":
     # G_test.clear()
     # print_number_nodes_edges(G_test, locals())
     fig = plt.figure()
-    nx.draw_shell(G_test, with_labels=True, font_weight='bold')
+    nx.draw_shell(G_test, with_labels=True, font_weight="bold")
     plt.show()

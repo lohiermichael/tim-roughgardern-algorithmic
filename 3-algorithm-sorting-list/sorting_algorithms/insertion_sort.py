@@ -19,5 +19,5 @@ def insertion_sort(L: List) -> List:
     return L
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     test_sorting_algo(algo_name=insertion_sort, number_tests=10)

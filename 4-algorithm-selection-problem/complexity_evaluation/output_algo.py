@@ -21,7 +21,7 @@ class AlgoAnalysisList:
         self.algo_name = algo.__name__
 
     def __repr__(self):
-        return f'AlgoAnalysis(name={self.algo_name})'
+        return f"AlgoAnalysis(name={self.algo_name})"
 
     def calculate_time_single_list(self, input_l: list) -> float:
         """
@@ -40,13 +40,14 @@ class AlgoAnalysisList:
 
         return end_time - start_time
 
-    def calculate_time_multiple_lists(self,
-                                      range_length: int,
-                                      harmonization: bool = False,
-                                      f_harmonization: Union[int, list] = 10,
-                                      worst_case: bool = True,
-                                      **kwargs) -> \
-            Union[pd.Series, pd.DataFrame]:
+    def calculate_time_multiple_lists(
+        self,
+        range_length: int,
+        harmonization: bool = False,
+        f_harmonization: Union[int, list] = 10,
+        worst_case: bool = True,
+        **kwargs,
+    ) -> Union[pd.Series, pd.DataFrame]:
         """
         Generate random input lists of variate length within the range size
         and perform the time computation
@@ -62,11 +63,13 @@ class AlgoAnalysisList:
         -------
         List[float]
         """
-        res_time_l = [self.calculate_time_single_list(input_l=InputList(l_length=l_length,
-                                                                        worst_case=worst_case,
-                                                                        **kwargs))
-                      for l_length in range(1, range_length + 1)]
-        dict_res_time = {'raw': res_time_l}
+        res_time_l = [
+            self.calculate_time_single_list(
+                input_l=InputList(l_length=l_length, worst_case=worst_case, **kwargs)
+            )
+            for l_length in range(1, range_length + 1)
+        ]
+        dict_res_time = {"raw": res_time_l}
 
         if harmonization:
             if type(f_harmonization) == int:
@@ -76,7 +79,7 @@ class AlgoAnalysisList:
                 b = [1.0 / n] * n
                 a = 1
                 res_time_filtered = lfilter(b, a, res_time_l)
-                dict_res_time[f'harmonization (n={n})'] = res_time_filtered
+                dict_res_time[f"harmonization (n={n})"] = res_time_filtered
 
         res_time = pd.DataFrame(dict_res_time)
         res_time.index += 1
@@ -113,13 +116,14 @@ class AlgoAnalysisListIndex:
 
         return end_time - start_time
 
-    def calculate_time_multiple_lists(self,
-                                      range_length: int,
-                                      harmonization: bool = False,
-                                      f_harmonization: Union[int, list] = 10,
-                                      worst_case: bool = True,
-                                      **kwargs) -> \
-            Union[pd.Series, pd.DataFrame]:
+    def calculate_time_multiple_lists(
+        self,
+        range_length: int,
+        harmonization: bool = False,
+        f_harmonization: Union[int, list] = 10,
+        worst_case: bool = True,
+        **kwargs,
+    ) -> Union[pd.Series, pd.DataFrame]:
         """
         Generate random input lists of variate length within the range size
         and perform the time computation
@@ -135,10 +139,13 @@ class AlgoAnalysisListIndex:
         -------
         List[float]
         """
-        res_time_l = [self.calculate_time_single_list(*InputListIndex(l_length=l_length,
-                                                                      worst_case=worst_case, **kwargs))
-                      for l_length in range(1, range_length + 1)]
-        dict_res_time = {'raw': res_time_l}
+        res_time_l = [
+            self.calculate_time_single_list(
+                *InputListIndex(l_length=l_length, worst_case=worst_case, **kwargs)
+            )
+            for l_length in range(1, range_length + 1)
+        ]
+        dict_res_time = {"raw": res_time_l}
 
         if harmonization:
             if type(f_harmonization) == int:
@@ -148,16 +155,18 @@ class AlgoAnalysisListIndex:
                 b = [1.0 / n] * n
                 a = 1
                 res_time_filtered = lfilter(b, a, res_time_l)
-                dict_res_time[f'harmonization (n={n})'] = res_time_filtered
+                dict_res_time[f"harmonization (n={n})"] = res_time_filtered
 
         res_time = pd.DataFrame(dict_res_time)
         res_time.index += 1
         return res_time
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     algo_test = AlgoAnalysisListIndex(quick_sort_reduction)
-    df = algo_test.calculate_time_multiple_lists(range_length=1000, harmonization=True, f_harmonization=[2, 20, 200])
+    df = algo_test.calculate_time_multiple_lists(
+        range_length=1000, harmonization=True, f_harmonization=[2, 20, 200]
+    )
     print(df)
     df.plot()
     plt.show()

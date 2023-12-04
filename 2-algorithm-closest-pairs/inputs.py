@@ -4,7 +4,13 @@ from typing import Union, Tuple
 
 
 class InputList(list):
-    def __init__(self, l_length: int = 100, min_value: int = 0, max_value: int = 10000, distinct_elements: bool = True):
+    def __init__(
+        self,
+        l_length: int = 100,
+        min_value: int = 0,
+        max_value: int = 10000,
+        distinct_elements: bool = True,
+    ):
         """
         Object of input list for algorithms
         Parameters
@@ -43,8 +49,9 @@ class InputList(list):
         -------
         """
         if self.distinct_elements:
-            assert self.l_length <= self.max_value - self.min_value + 1, "The range of values chosen " \
-                                                                         "doesn't allow to have distinct values"
+            assert self.l_length <= self.max_value - self.min_value + 1, (
+                "The range of values chosen " "doesn't allow to have distinct values"
+            )
             already_used = set()
             for index in range(self.l_length):
                 # Find an element not present in already_used
@@ -59,7 +66,13 @@ class InputList(list):
 
 
 class InputListPointsXY(list):
-    def __init__(self, l_length: int = 100, min_value: int = 0, max_value: int = 10000, distinct_elements: bool = True):
+    def __init__(
+        self,
+        l_length: int = 100,
+        min_value: int = 0,
+        max_value: int = 10000,
+        distinct_elements: bool = True,
+    ):
         """
         Object of list  of points of the graph having each x and y coordinates
         Parameters
@@ -82,14 +95,18 @@ class InputListPointsXY(list):
         -------
         fig_
         """
-        x_values = InputList(l_length=self.l_length,
-                             min_value=self.min_value,
-                             max_value=self.max_value,
-                             distinct_elements=self.distinct_elements)
-        y_values = InputList(l_length=self.l_length,
-                             min_value=self.min_value,
-                             max_value=self.max_value,
-                             distinct_elements=self.distinct_elements)
+        x_values = InputList(
+            l_length=self.l_length,
+            min_value=self.min_value,
+            max_value=self.max_value,
+            distinct_elements=self.distinct_elements,
+        )
+        y_values = InputList(
+            l_length=self.l_length,
+            min_value=self.min_value,
+            max_value=self.max_value,
+            distinct_elements=self.distinct_elements,
+        )
 
         for x, y in zip(x_values, y_values):
             self.append((x, y))
@@ -111,18 +128,20 @@ class InputListPointsXY(list):
         fig, ax = plt.subplots()
         fig.set_size_inches(18.5, 18.5)
         ax.scatter(*zip(*self))
-        if annotate or annotate == 'all':
+        if annotate or annotate == "all":
             for i, (x, y) in enumerate(self):
-                ax.annotate(f' {i} ({x}, {y})', (x, y), fontsize=15)
-        elif annotate == 'coordinates':
+                ax.annotate(f" {i} ({x}, {y})", (x, y), fontsize=15)
+        elif annotate == "coordinates":
             for i, (x, y) in enumerate(self):
-                ax.annotate(f' ({x}, {y})', (x, y), fontsize=15)
-        elif annotate == 'number':
+                ax.annotate(f" ({x}, {y})", (x, y), fontsize=15)
+        elif annotate == "number":
             for i, (x, y) in enumerate(self):
-                ax.annotate(f' {i}', (x, y), fontsize=15)
+                ax.annotate(f" {i}", (x, y), fontsize=15)
         return fig, ax
 
-    def plot_line_between(self, point1: Tuple, point2: Tuple, annotate: Union[bool, str] = False):
+    def plot_line_between(
+        self, point1: Tuple, point2: Tuple, annotate: Union[bool, str] = False
+    ):
         """
         Function that plot a line between to pairs of points of interest
         Args:
@@ -139,6 +158,6 @@ class InputListPointsXY(list):
 
         """
         fig, ax = self.plot(annotate=annotate)
-        ax.plot([point1[0], point2[0]], [point1[1], point2[1]], '-r')
+        ax.plot([point1[0], point2[0]], [point1[1], point2[1]], "-r")
         plt.show()
         return fig, ax

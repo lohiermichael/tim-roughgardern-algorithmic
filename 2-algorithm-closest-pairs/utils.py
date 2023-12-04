@@ -1,4 +1,3 @@
-
 def euclidean_distance(a, b):
     """
     Perform the Euclidean distance between two points in the plan

@@ -50,11 +50,15 @@ class CollectionAlgosInputList:
         random_list = InputList(**kwargs)
 
         # First assert that they all have the same results, if not who cares how fast they are
-        assert self.have_same_output(random_list), "The time evaluation is not significant as th outputs of" \
-                                                   "the algorithms differ"
+        assert self.have_same_output(random_list), (
+            "The time evaluation is not significant as th outputs of"
+            "the algorithms differ"
+        )
 
-        return {algo.__name__: calculate_time_algo(algo=algo, input_l=random_list)
-                for algo in self.list_algorithms_names}
+        return {
+            algo.__name__: calculate_time_algo(algo=algo, input_l=random_list)
+            for algo in self.list_algorithms_names
+        }
 
     def time_multiple_random_lists(self, range_length: int, **kwargs):
         """
@@ -74,9 +78,11 @@ class CollectionAlgosInputList:
         # The key of the sub-dictionaries is the name of the algorithm that is performed
         # as future column of the dataFrame
         # The values of the dataFrame are the times of computation
-        dict_of_dicts = {l_length: self.time_random_list(l_length=l_length, **kwargs)
-                         for l_length in range(1, range_length)}
-        return pd.DataFrame.from_dict(data=dict_of_dicts, orient='index')
+        dict_of_dicts = {
+            l_length: self.time_random_list(l_length=l_length, **kwargs)
+            for l_length in range(1, range_length)
+        }
+        return pd.DataFrame.from_dict(data=dict_of_dicts, orient="index")
 
 
 def calculate_time_algo(algo: function, input_l: list) -> float:
@@ -98,5 +104,5 @@ def calculate_time_algo(algo: function, input_l: list) -> float:
     return end_time - start_time
 
 
-if __name__ == '__main__':
-    print(CollectionAlgosInputList('a', 'c').list_algorithms_names)
+if __name__ == "__main__":
+    print(CollectionAlgosInputList("a", "c").list_algorithms_names)

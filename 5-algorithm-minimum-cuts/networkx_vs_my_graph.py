@@ -7,4 +7,3 @@ if __name__ == "__main__":
     G = Graph()
     G.add_vertex()
     plt.show()
-

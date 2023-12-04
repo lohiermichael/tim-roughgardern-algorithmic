@@ -21,7 +21,7 @@ def merge_sort_explanation(L: List) -> List:
         L_sorted = []
         # 'i' will iterate through L_left_sorted
         # 'j' will iterate through L_right_sorted
-        i, j= 0, 0
+        i, j = 0, 0
         while i < len(L_left_sorted) and j < len(L_right_sorted):
             if L_left_sorted[i] < L_right_sorted[j]:
                 L_sorted.append(L_left_sorted[i])
@@ -76,5 +76,5 @@ def merge_sort(L: List) -> List:
         return L
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     test_sorting_algo(algo_name=merge_sort, number_tests=1000)

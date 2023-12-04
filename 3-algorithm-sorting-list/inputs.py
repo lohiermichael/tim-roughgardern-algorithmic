@@ -2,11 +2,14 @@ import random
 
 
 class InputList(list):
-    def __init__(self, l_length: int = 100,
-                 min_value: int = 0,
-                 max_value: int = 10000,
-                 distinct_elements: bool = True,
-                 worst_case: bool = False):
+    def __init__(
+        self,
+        l_length: int = 100,
+        min_value: int = 0,
+        max_value: int = 10000,
+        distinct_elements: bool = True,
+        worst_case: bool = False,
+    ):
         """
         Object of input list for algorithms
         Parameters
@@ -47,8 +50,9 @@ class InputList(list):
         -------
         """
         if self.distinct_elements:
-            assert self.l_length <= self.max_value - self.min_value + 1, "The range of values chosen " \
-                                                                         "doesn't allow to have distinct values"
+            assert self.l_length <= self.max_value - self.min_value + 1, (
+                "The range of values chosen " "doesn't allow to have distinct values"
+            )
             already_used = set()
             for index in range(self.l_length):
                 # Find an element not present in already_used
@@ -64,6 +68,6 @@ class InputList(list):
             self.sort(reverse=True)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     test = InputList(worst_case=True)
     print(test)

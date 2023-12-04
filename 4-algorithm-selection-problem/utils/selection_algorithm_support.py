@@ -11,4 +11,6 @@ def check_order_statistics(L: list, i: int) -> None:
     if 0 <= i <= len(L) - 1:
         pass
     else:
-        raise ValueError('The number of order statistic is out of range. Please choose it in [0..len(L)-1]')
+        raise ValueError(
+            "The number of order statistic is out of range. Please choose it in [0..len(L)-1]"
+        )

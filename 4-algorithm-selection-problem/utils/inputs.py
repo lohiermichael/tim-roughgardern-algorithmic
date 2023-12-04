@@ -3,11 +3,14 @@ from typing import Tuple
 
 
 class InputList(list):
-    def __init__(self, l_length: int = 100,
-                 min_value: int = 0,
-                 max_value: int = 10000,
-                 distinct_elements: bool = True,
-                 worst_case: bool = False):
+    def __init__(
+        self,
+        l_length: int = 100,
+        min_value: int = 0,
+        max_value: int = 10000,
+        distinct_elements: bool = True,
+        worst_case: bool = False,
+    ):
         """
         Object of input list for algorithms
         Parameters
@@ -49,8 +52,9 @@ class InputList(list):
         -------
         """
         if self.distinct_elements:
-            assert self.l_length <= self.max_value - self.min_value + 1, "The range of values chosen " \
-                                                                         "doesn't allow to have distinct values"
+            assert self.l_length <= self.max_value - self.min_value + 1, (
+                "The range of values chosen " "doesn't allow to have distinct values"
+            )
             already_used = set()
             for index in range(self.l_length):
                 # Find an element not present in already_used
@@ -67,11 +71,14 @@ class InputList(list):
 
 
 class InputListIndex(Tuple):
-    def __new__(cls, l_length: int = 100,
-                min_value: int = 0,
-                max_value: int = 10000,
-                distinct_elements: bool = True,
-                worst_case: bool = False):
+    def __new__(
+        cls,
+        l_length: int = 100,
+        min_value: int = 0,
+        max_value: int = 10000,
+        distinct_elements: bool = True,
+        worst_case: bool = False,
+    ):
         """
         Object of input list and index. For instance, for problems like the Selection Algorithm for lists,
         The input of a solution algorithm is a list L AND a number of order statistics (i.e an integer in
@@ -84,15 +91,17 @@ class InputListIndex(Tuple):
             distinct_elements (bool): distinct elements in the list
             worst_case (bool): in the context of list sorting, it gives a reverse
         """
-        cls.input_list = InputList(l_length=l_length,
-                                   min_value=min_value,
-                                   max_value=max_value,
-                                   distinct_elements=distinct_elements,
-                                   worst_case=worst_case)
-        cls.index = random.randint(0, len(cls.input_list)-1)
+        cls.input_list = InputList(
+            l_length=l_length,
+            min_value=min_value,
+            max_value=max_value,
+            distinct_elements=distinct_elements,
+            worst_case=worst_case,
+        )
+        cls.index = random.randint(0, len(cls.input_list) - 1)
         return super().__new__(InputListIndex, (cls.input_list, cls.index))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     test = InputListIndex(l_length=3)
     print(test)

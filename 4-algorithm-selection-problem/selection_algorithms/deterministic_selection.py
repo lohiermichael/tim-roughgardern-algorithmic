@@ -11,8 +11,10 @@ def find_median_small_list(L: list) -> int:
     Returns:
         The median
     """
-    assert len(L) <= 5, "You are trying to cheat, this function is used only for " \
-                        "small lists (len<=5)"
+    assert len(L) <= 5, (
+        "You are trying to cheat, this function is used only for "
+        "small lists (len<=5)"
+    )
     return sorted(L)[int(len(L) / 2)]
 
 
@@ -32,7 +34,7 @@ def choose_pivot(L_init: list, L_iter: list):
         L_init.remove(pivot)
         return pivot
     else:
-        C = [find_median_small_list(L_iter[i:i + 5]) for i in range(0, n, 5)]
+        C = [find_median_small_list(L_iter[i : i + 5]) for i in range(0, n, 5)]
         return choose_pivot(L_init=L_init, L_iter=C)
 
 
@@ -71,10 +73,12 @@ def deterministic_selection(L_input: list, i: int) -> int:
     return sub_function(L, i)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     test_list = InputList(l_length=5)
     # To implement in the notebook Make a graph of repartition
     print(test_list)
     for i in range(len(test_list)):
-        print(f'The {i}-th order statistics is {deterministic_selection(L_input=test_list, i=i)}')
+        print(
+            f"The {i}-th order statistics is {deterministic_selection(L_input=test_list, i=i)}"
+        )
     print(test_list)
